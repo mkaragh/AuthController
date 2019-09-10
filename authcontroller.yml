@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: authcontroller
+spec:
+  selector:
+    matchLabels:
+      app: authcontroller
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: authcontroller
+    spec:
+      containers:
+      - name: authcontroller
+        image: mkadocker/authcontroller
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: server
+        - containerPort: 8081
+          name: management
+        env:
+        
